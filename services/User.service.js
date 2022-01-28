@@ -34,7 +34,7 @@ class UserService {
         const responseBody = {};
 
         try {
-            const isUserFound = await UserModel.findOne({ '_id': id });
+            const isUserFound = await UserModel.findById(id);
 
             if (!isUserFound) {
                 responseBody.message = 'Could not find user to delete';
@@ -102,7 +102,7 @@ class UserService {
         const responseBody = {};
 
         try {
-            const isUserFound = await UserModel.findOne({ '_id': id });
+            const isUserFound = await UserModel.findById(id);
 
             if (!isUserFound) {
                 responseBody.message = 'Could not find a user with the given id.';
