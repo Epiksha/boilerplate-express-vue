@@ -1,0 +1,21 @@
+@use '../mixins';
+@use '../variables' as *;
+
+@include mixins.font-import('Roboto', 'Roboto-Regular.ttf', normal, normal);
+@include mixins.font-import('Roboto', 'Roboto-Italic.ttf', normal, italic);
+@include mixins.font-import('Roboto', 'Roboto-Bold.ttf', bold, normal);
+@include mixins.font-import('Roboto', 'Roboto-BoldItalic.ttf', bold, italic);
+@include mixins.font-import('Roboto', 'Roboto-Light.ttf', lighten, normal);
+@include mixins.font-import('Roboto', 'Roboto-LightItalic.ttf', lighten, italic);
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: $family-1;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}

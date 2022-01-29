@@ -1,0 +1,43 @@
+@use 'sass:color';
+@use '../variables.scss' as *;
+@use '../_mixins.scss' as *;
+
+button, .button {
+    display: inline-block;
+
+    padding: 1.2rem 4rem;
+    border: none;
+    border-radius: 0.5rem;
+
+    background-color: $color3;
+    color: $color0;
+
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: all $timing-1;
+
+    &:hover {
+        background-color: color.adjust($color3, $lightness: -10%);
+    }
+
+    &:focus {
+        outline: solid 0.2rem $color2;
+    }
+}
+
+.button--secondary {
+    background-color: $color2;
+
+    &:hover {
+        background-color: color.adjust($color2, $lightness: 10%);
+    }
+
+    &:focus {
+        outline-color: $color3;
+    }
+}

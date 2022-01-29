@@ -1,0 +1,13 @@
+@use '../variables.scss' as *;
+
+.checkbox {
+    display: flex;
+
+    position: relative;
+
+    cursor: pointer;
+
+    &__text {
+        padding-left: 1rem;
+    }
+}

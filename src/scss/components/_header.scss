@@ -1,0 +1,32 @@
+@use '../variables' as *;
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    box-sizing: border-box;
+    height: 7.2rem;
+    width: 100%;
+    padding: 1rem 0;
+
+    background-color: $color0;
+    box-shadow: $box-shadow-1;
+
+    line-height: 1;
+
+    &__title {
+        flex-grow: 1;
+
+        color: $color3;
+
+        font-size: 2.4rem;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 1;
+    }
+}
