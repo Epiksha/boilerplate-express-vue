@@ -1,0 +1,15 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+a {
+    color: $color3;
+
+    font-weight: bold;
+    text-decoration: none;
+
+    transition: all $timing-1;
+
+    &:hover, &:focus {
+        color: color.adjust($color3, $lightness: -10%);
+    }
+}

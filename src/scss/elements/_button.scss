@@ -23,10 +23,12 @@ button, .button {
 
     &:hover {
         background-color: color.adjust($color3, $lightness: -10%);
+        color: $color0;
     }
 
     &:focus {
         outline: solid 0.2rem $color2;
+        color: $color0;
     }
 }
 

@@ -1,5 +1,11 @@
 <template>
     <div class="styleguide container py-4">
+        <router-link
+            to="/"
+        >
+            Home
+        </router-link>
+
         <!-- Buttons -->
         <section class="styleguide__buttons">
             <h2>Buttons</h2>
@@ -14,7 +20,14 @@
                 to="/styleguide"
                 class="button"
             >
-                Link
+                Link with button class
+            </router-link>
+            
+            <router-link
+                to="/styleguide"
+                class="mx-2"
+            >
+                Default Link
             </router-link>
         </section>
 
@@ -22,19 +35,43 @@
         <section class="styleguide__typography">
             <h2>Inputs</h2>
 
-            <GRange v-model="rangeValue" />
+            <h3>Range Slider (Default)</h3>
+            
+            <GRange
+                v-model="rangeValue"
+            />
+            
+            <h3 class="mt-4">
+                Range Slider (No labels and permanent tooltip)
+            </h3>
+
+            <GRange
+                v-model="rangeValue"
+                :is-labelled="false"
+                :tooltip="{ isPermanent: true }"
+            />
+            
+            <h3 class="my-4">
+                Range Slider (No labels and no tooltip)
+            </h3>
+
+            <GRange
+                v-model="rangeValue"
+                :is-labelled="false"
+                :is-tooltipped="false"
+            />
 
             <GCheckboxGroup
                 :items="checkboxes"
                 label="Checkbox Group (Default)"
-                class="mt-2"
+                class="mt-4"
             />
             
             <GCheckboxGroup
                 :items="checkboxes"
                 :is-vertical="true"
                 label="Checkbox Group (Vertical)"
-                class="mt-2"
+                class="mt-4"
             />
         </section>
 

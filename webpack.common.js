@@ -22,15 +22,16 @@ module.exports = {
         rules: [
             {
                 test: /\.js/,
-                use: [
-                    'babel-loader'
-                ]
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    },
+                },
             },
             {
                 test: /\.vue/,
-                use: [
-                    'vue-loader'
-                ]
+                use: ['vue-loader']
             },
             {
                 enforce: 'pre',
