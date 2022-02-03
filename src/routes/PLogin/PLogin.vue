@@ -1,15 +1,15 @@
 <template>
     <div>
         <div class="container py-4">
-            <h1>Contact</h1>
+            <h1>Login</h1>
             
             <router-link
-                to="/styleguide"
+                to="/"
             >
-                Styleguide
+                Home
             </router-link>
         </div>
     </div>
 </template>
 
-<script src="./PContact" />
+<script src="./PLogin" />
