@@ -1,6 +1,8 @@
 @use '../variables' as *;
 
 .range {
+    $root: &;
+
     display: flex;
     align-items: center;
 
@@ -18,12 +20,16 @@
         font-weight: bold;
         line-height: 1;
         
-        &--min {
+        &--start {
             padding-right: 1rem;
         }
         
-        &--max {
+        &--end {
             padding-left: 1rem;
+        }
+
+        #{$root}--video & {
+            color: $color0;
         }
     }
 

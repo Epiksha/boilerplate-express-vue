@@ -15,6 +15,24 @@ export const copyToClipboard = text => {
     document.body.removeChild(element);
 };
 
+export const pad = number => number > 9 ? `${number}` : `0${number}`;
+
+export const formatTime = timeInSeconds => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+
+    if (hours) {
+        return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+    
+    if (minutes) {
+        return `${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    return `00:${pad(seconds)}`;
+};
+
 export const htmlToText = html => {
     const tempElement = document.createElement('textarea');
     
@@ -28,7 +46,9 @@ export default {
         const utility = {
             capitalize,
             copyToClipboard,
+            formatTime,
             htmlToText,
+            pad,
         };
 
         Vue.$utility = utility;

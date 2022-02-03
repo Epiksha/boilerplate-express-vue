@@ -1,23 +1,25 @@
 @use '../variables' as *;
 
 .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     position: sticky;
     top: 0;
-    z-index: 1;
-
-    box-sizing: border-box;
-    height: 7.2rem;
-    width: 100%;
-    padding: 1rem 0;
+    z-index: 10;
 
     background-color: $color0;
-    box-shadow: $box-shadow-1;
+    box-shadow: $boxShadow1;
 
     line-height: 1;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        box-sizing: border-box;
+        height: 7.2rem;
+        width: 100%;
+        padding: 1rem 0;
+    }
 
     &__title {
         flex-grow: 1;

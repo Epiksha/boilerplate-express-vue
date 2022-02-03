@@ -1,9 +1,14 @@
 <template>
-    <label class="checkbox">
+    <label
+        :id="id"
+        class="checkbox"
+    >
         <input
+            :id="`${id}-input`"
             type="checkbox"
             :checked="isSelected"
             class="input input--checkbox"
+            :aria-labelledby="`${id}-label`"
         >
 
         <GIcon
@@ -13,6 +18,7 @@
 
         <span
             v-if="label"
+            :id="`${id}-label`"
             class="checkbox__text"
             v-text="label"
         />

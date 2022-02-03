@@ -44,6 +44,46 @@ input[type=checkbox] {
     cursor: pointer;
 
     &:checked {
-        background-color: $color3;
+        background-color: $color6;
+    }
+}
+
+input[type=radio] {
+    position: relative;
+
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+
+    background-color: $color4;
+
+    transition: background-color $timing-1;
+
+    appearance: none;
+    cursor: pointer;
+
+    &:checked:before {
+        opacity: 1;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 60%;
+        height: 60%;
+        border-radius: 50%;
+
+        background-color: $color6;
+
+        opacity: 0;
+        pointer-events: none;
     }
 }

@@ -2,7 +2,10 @@ import { arrayValidator } from 'vue-props-validation';
 
 export default {
     props: {
-        label: String,
+        id: {
+            String,
+            required: true,
+        },
         isVertical: {
             default: false,
             type: Boolean,
@@ -20,5 +23,6 @@ export default {
                 },
             }),
         },
+        label: String,
     },
 };

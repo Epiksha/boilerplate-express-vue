@@ -1,9 +1,13 @@
 export default {
     props: {
-        label: String,
+        id: {
+            type: String,
+            required: true,
+        },
         isSelected: {
             type: Boolean,
             required: true,
         },
+        label: String,
     },
 };

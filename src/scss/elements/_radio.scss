@@ -1,1 +1,13 @@
 @use '../variables.scss' as *;
+
+.radio {
+    display: flex;
+
+    position: relative;
+
+    cursor: pointer;
+
+    &__text {
+        padding-left: 1rem;
+    }
+}

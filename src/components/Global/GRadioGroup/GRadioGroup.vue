@@ -1,28 +1,33 @@
 <template>
-    <form class="radios">
+    <form
+        :id="id"
+        class="radioGroup"
+        :class="{'radioGroup--vertical': isVertical}"
+    >
         <label
             v-for="(radio, index) in radios"
             :key="index"
             class="radio"
         >
             <input
-                :id="radio.id"
                 v-model="current"
+                :aria-labelledby="`${id}-radio-${index + 1}`"
                 type="radio"
-                :name="group"
+                :name="id"
                 class="input input--radio"
-                :value="radio.text"
+                :value="radio.label"
             >
 
             <div class="radio__circle"></div>
             
             <span
+                :id="`${id}-radio-${index + 1}`"
                 :for="radio.id"
                 class="radio__text"
-                v-text="radio.text"
+                v-text="radio.label"
             />
         </label>
     </form>
 </template>
 
-<script src="./GRadios" />
+<script src="./GRadioGroup" />

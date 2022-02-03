@@ -1,0 +1,31 @@
+.radioGroup {
+    $root: &;
+
+    display: flex;
+
+    width: 100%;
+    padding-left: 0;
+
+    list-style: none;
+
+    &#{&}--vertical {
+        flex-direction: column;
+
+        .radio {
+            margin-top: 1rem;
+            margin-left: 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .radio {
+        margin-left: 2rem;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}

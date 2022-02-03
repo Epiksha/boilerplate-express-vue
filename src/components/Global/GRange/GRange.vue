@@ -6,13 +6,15 @@
         <span
             v-if="isLabelled"
             ref="minLabel"
-            class="range__label range__label--min"
-            v-text="min"
+            class="range__label range__label--start"
+            v-text="startLabel ? startLabel : min"
         />
 
         <div class="range__container">
             <input
+                :id="id"
                 ref="rangeInput"
+                :aria-label="ariaLabel"
                 :value="value"
                 type="range"
                 :min="min"
@@ -23,8 +25,8 @@
                 :aria-valuemax="max"
                 :aria-valuenow="value"
                 @input="({ target }) => $emit('input', +target.value)"
-                @mousedown="toggleTooltip"
-                @mouseup="toggleTooltip"
+                @mousedown="() => { toggleTooltip(); $emit('mousedown'); }"
+                @mouseup="() => { toggleTooltip(); $emit('mouseup'); }"
             >
         
             <div
@@ -38,12 +40,11 @@
             </div>
         </div>
 
-
         <span
             v-if="isLabelled"
             ref="maxLabel"
-            class="range__label range__label--max"
-            v-text="max"
+            class="range__label range__label--end"
+            v-text="endLabel ? endLabel : max"
         />
     </div>
 </template>

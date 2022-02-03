@@ -50,4 +50,25 @@
             }
         }
     }
+
+    &--video {
+        @include icon-dimensions(1.8rem);
+        pointer-events: none;
+        
+        .button--bigPlay & {
+            @include icon-dimensions(2rem);
+        }
+
+        svg {
+            fill: $color0;
+        }
+    }
+
+    &--play {
+        margin-left: 0.2rem;
+        
+        .button--bigPlay & {
+            margin-left: 0.4rem;
+        }
+    }
 }

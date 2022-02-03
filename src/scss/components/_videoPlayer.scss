@@ -1,0 +1,82 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.videoPlayer {
+    position: relative;
+
+    overflow: hidden;
+    border-radius: 1rem;
+
+    &__wrapper {
+        position: relative;
+
+        padding-bottom: 56.25%;
+    }
+
+    &__subtitles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transform: translateY(-100%);
+
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1rem 2rem;
+
+        background-color: color.adjust($color5, $alpha: -0.2);
+        color: $color0;
+        box-shadow: $boxShadow1;
+
+        letter-spacing: 0.1rem;
+        list-style: none;
+
+        visibility: hidden;
+        transition: transform $timing-1, visibility $timing-1;
+
+        &.active {
+            transform: none;
+
+            visibility: visible;
+        }
+
+        li {
+            display: inline-block;
+
+            padding: 0 2rem;
+            border-right: solid 0.1rem currentColor;
+
+            &:first-child {
+                padding-left: 0;
+            }
+            
+            &:last-child {
+                padding-right: 0;
+                border-right: none;
+            }
+
+            button {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    &__controls {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1rem 2rem;
+
+        background-color: $color5;
+
+        &__inner {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__track {
+        flex-grow: 1;
+
+        margin: 0 2rem;
+    }
+}

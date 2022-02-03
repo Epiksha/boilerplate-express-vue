@@ -17,19 +17,19 @@ module.exports = merge(common, {
                 minify: {
                     removeAttrbuteQuotes: true,
                     collapseWhitespace: true,
-                    removeComments: true
+                    removeComments: true,
                 }
             }),
             new OptimizeCSSAssetsPlugin(),
-            new MinifyPlugin()
+            new MinifyPlugin(),
         ]
     },
 
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css'
+            filename: 'styles.css',
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ],
     
     module: {
@@ -40,9 +40,9 @@ module.exports = merge(common, {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader'
-                ]
-            }
-        ]
-    }
+                    'sass-loader',
+                ],
+            },
+        ],
+    },
 });
