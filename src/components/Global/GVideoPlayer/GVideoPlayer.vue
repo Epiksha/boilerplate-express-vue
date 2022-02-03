@@ -118,6 +118,7 @@
                         :is-tooltipped="false"
                         :step="0.01"
                         :labels="labels"
+                        :increased-offset-value="0.75"
                         @mousedown="handleRangeMousedown"
                         @mouseup="handleRangeMouseup"
                     />

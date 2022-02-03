@@ -15,6 +15,7 @@ export default {
             }),
         },
         id: String,
+        increasedOffsetValue: { type: Number, default: 0 },
         isLabelled: { type: Boolean, default: true },
         isTooltipped: { type: Boolean, default: true },
         labels: {
@@ -77,13 +78,12 @@ export default {
 
     computed: {
         backgroundImage() {
-            const halfThumbWidthREM = 0.75;
             const { progress, track } = this.colors;
 
             return `linear-gradient(
                 to right,
-                ${progress} -${100 + this.percentage}% calc(${this.percentage}% + ${halfThumbWidthREM}rem),
-                ${track} calc(${this.percentage}% + ${halfThumbWidthREM}rem) ${100 + this.percentage}%
+                ${progress} -${100 + this.percentage}% calc(${this.percentage}% + ${this.increasedOffsetValue}rem),
+                ${track} calc(${this.percentage}% + ${this.increasedOffsetValue}rem) ${100 + this.percentage}%
             )`;
         },
 
