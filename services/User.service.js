@@ -1,11 +1,17 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const { JWT_SECRET } = require('../config');
 const UserModel = require('../models/User.model');
 
 class UserService {
     async createUser(requestBody) {
         const responseBody = {};
-
         const full_name = `${requestBody.first_name} ${requestBody.last_name}`;
         const userData = {...requestBody, full_name};
+
+        const encryptedPassword = await bcrypt.hash(requestBody.password, 10);
+        userData.password = encryptedPassword;
 
         try {
             const isUserFound = await UserModel.findOne({ 'email': requestBody.email });
@@ -16,11 +22,25 @@ class UserService {
                 return responseBody;
             }
 
-            const result = await UserModel.create(userData);
+            const user = await UserModel.create(userData);
+
+            const token = jwt.sign(
+                { user_id: user._id, email: requestBody.email },
+                JWT_SECRET,
+                { expiresIn: "2 minutes" }
+            );
+            
+            user.token = token;
 
             responseBody.message = 'Successfully created user.';
             responseBody.statusCode = 200;
-            responseBody.data = result;
+            responseBody.data = {
+                email: user.email,
+                first_name: user.first_name,
+                full_name: user.full_name,
+                last_name: user.last_name,
+                token: user.token,
+            };
         } catch (error) {
             console.error(error);
             responseBody.message = 'The server encountered an error.';
