@@ -3,9 +3,9 @@
 *.sass.map
 *.scss.map
 node_modules
-_Output/
 dist/
 .env
 .yarnrc.yml
 .pnp.cjs
+package-lock.json
 yarn*
