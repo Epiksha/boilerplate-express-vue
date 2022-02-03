@@ -18,6 +18,8 @@
         "@babel/core": "7.6.4",
         "@babel/polyfill": "7.7.0",
         "@babel/preset-env": "7.6.3",
+        "@commitlint/cli": "^16.1.0",
+        "@commitlint/config-conventional": "^16.0.0",
         "@vue/test-utils": "1.0.0-beta.29",
         "@webpack-cli/serve": "1.6.1",
         "babel-core": "7.0.0-bridge.0",
