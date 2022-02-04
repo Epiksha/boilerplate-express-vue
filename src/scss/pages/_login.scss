@@ -1,3 +1,30 @@
+@use '../defaults' as *;
+
 .login {
-    
+    $root: &;
+
+    display: flex;
+    align-items: center;
+
+    height: calc(100vh - #{$default-header-height});
+
+    &__form {
+        margin-top: 4rem;
+    }
+
+    &__container {
+        flex-basis: 50%;
+
+        box-sizing: border-box;
+
+        #{$root}__inner {
+            max-width: 45rem;
+            margin: auto;
+        }
+    }
+
+    &__image {
+        flex-basis: 50%;
+        height: 100%;
+    }
 }

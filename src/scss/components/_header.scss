@@ -1,4 +1,5 @@
 @use '../variables' as *;
+@use '../defaults' as *;
 
 .header {
     $root: &;
@@ -18,7 +19,7 @@
         align-items: center;
     
         box-sizing: border-box;
-        height: 7.2rem;
+        height: $default-header-height;
         width: 100%;
         padding: 1rem 0;
     }

@@ -22,7 +22,7 @@
                 :autocomplete="false"
                 :required="required"
                 :aria-required="required"
-                :aria-invalid="errors && errors.length"
+                :aria-invalid="errors && errors.length ? true : false"
                 :value="value"
                 @input="$emit('input', $event.target.value)"
                 @focus="focused = true"
@@ -45,6 +45,7 @@
                 v-if="type === 'password'"
                 class="button button--input"
                 tabindex="-1"
+                aria-label="Show and hide password"
                 @click.prevent="() => isShowingPassword = !isShowingPassword"
             >
                 <GIcon
