@@ -54,13 +54,9 @@
             </button>
         </div>
 
-        <span
-            v-for="(error, index) in errors"
-            :key="error"
-            :aria-label="`${label} error ${index + 1}`"
-            class="errorText"
-            role="alert"
-            v-html="error"
+        <GError
+            v-if="errors && errors.length"
+            :errors="errors"
         />
     </fieldset>
 </template>

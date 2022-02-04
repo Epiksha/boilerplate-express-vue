@@ -16,7 +16,7 @@ const svgs = require.context('./assets/icons/', true, /\.svg$/);
 svgs.keys().forEach(svgs);
 
 // Register global components
-const globals = ['GCheckbox', 'GCheckboxGroup', 'GIcon', 'GImage', 'GInput', 'GRadioGroup', 'GRange', 'GSpinner', 'GTrack', 'GVideoPlayer'];
+const globals = ['GCheckbox', 'GCheckboxGroup', 'GError', 'GIcon', 'GImage', 'GInput', 'GRadioGroup', 'GRange', 'GSpinner', 'GTrack', 'GVideoPlayer'];
 
 globals.forEach(component => {
     Vue.component(component, require(`./components/Global/${component}/${component}.vue`).default);

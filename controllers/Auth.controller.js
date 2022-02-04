@@ -2,15 +2,15 @@ const AuthService = require('../services/Auth.service');
 
 class AuthController {
     async createToken(request, response) {
-        const responseBody = await AuthService.login(request.body);
+        const payload = await AuthService.login(request);
 
-        response.status(responseBody.statusCode).json(responseBody);
+        response.status(payload.statusCode).send(payload);
     }
 
     async validate(request, response) {
-        const responseBody = await AuthService.validate(request);
+        const payload = await AuthService.validate(request, response);
 
-        response.status(responseBody.statusCode).json(responseBody);
+        response.status(payload.statusCode).send(payload);
     }
 }
 

@@ -3,7 +3,9 @@ export default {
 
     state: {
         email: '',
-        name: '',
+        firstName: '',
+        fullName: '',
+        lastName: '',
         token: '',
     },
 
@@ -20,13 +22,27 @@ export default {
     },
 
     actions: {
-        set({ commit }, { token, name, email }) {
+        set({ commit }, {
+            email,
+            first_name: firstName,
+            full_name: fullName,
+            last_name: lastName,
+            token,
+        }) {
+            if (firstName !== null && firstName !== undefined) {
+                commit('set', { property: 'firstName', value: firstName });
+            }
+            
+            if (fullName !== null && fullName !== undefined) {
+                commit('set', { property: 'fullName', value: fullName });
+            }
+
             if (token !== null && token !== undefined) {
                 commit('set', { property: 'token', value: token });
             }
             
-            if (name !== null && name !== undefined) {
-                commit('set', { property: 'name', value: name });
+            if (lastName !== null && lastName !== undefined) {
+                commit('set', { property: 'lastName', value: lastName });
             }
             
             if (email !== null && email !== undefined) {

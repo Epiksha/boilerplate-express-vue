@@ -1,6 +1,8 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const { join } = require('path');
+const webpack = require('webpack');
+require('dotenv').config({ path: '.frontend.env'});
 
 module.exports = {
     entry: [
@@ -16,6 +18,9 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new SpriteLoaderPlugin(),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(process.env),
+        }),
     ],
 
     module: {

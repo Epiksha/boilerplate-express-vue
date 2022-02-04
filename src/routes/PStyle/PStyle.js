@@ -15,11 +15,4 @@ export default {
         rangeValue: 100,
         text: '',
     }),
-
-    methods: {
-        
-    },
-
-    mounted() {
-    },
 };

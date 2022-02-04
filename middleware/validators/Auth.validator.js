@@ -14,24 +14,22 @@ class AuthValidator {
         const { error } = loginSchema.validate(request.body);
 
         if (error) {
-            response.status(422).json({
+            response.status(422).send({
                 message: error.details.map(({ message }) => message),
                 data: request.body,
-                statusCode: 422,
             });
         }
 
         next();
     }
 
-    validateToken(request, response, next) {
+    async validateToken(request, response, next) {
         const token = utilities.request.extractToken(request);
 
         if (!token) {
-            response.status(401).json({
+            response.status(401).send({
                 data: request.body,
                 message: 'No token passed in with request.',
-                statusCode: 401,
             });
         }
 
@@ -49,10 +47,9 @@ class AuthValidator {
                 message = 'Invalid token.'
             }
 
-            response.status(401).json({
+            response.status(401).send({
                 data: request.body,
                 message,
-                statusCode: 401,
             });
         }
     }
