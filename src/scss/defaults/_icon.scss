@@ -1,0 +1,46 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+// Global
+$display: inline-block;
+$vertical-align: middle;
+
+$dimensions: 3.6rem;
+
+$fill: $color1;
+
+$transition: all $timing-1;
+$svg-transition: fill $timing-1;
+
+// Checkbox
+$checkbox-top: 0.5rem;
+$checkbox-left: 0.4rem;
+
+$checkbox-dimensions: 1.6rem;
+
+$checkbox-opacity: 0;
+$checkbox-hover-opacity: 0.2;
+$checkbox-focus-opacity: 0.2;
+$checkbox-selected-opacity: 1;
+$checkbox-selected-fill: $color0;
+$checkbox-transition: all $timing-1;
+
+// Email
+$email-offset: 2rem;
+$email-dimensions: 2.4rem;
+$email-fill: $color3;
+
+// Input
+$input-dimensions: 2.4rem;
+
+// Password
+$password-dimensions: 2.4rem;
+$password-fill: $color3;
+$password-hover-fill: color.adjust($color3, $lightness: -10%);
+
+// Video
+$video-dimensions: 1.8rem;
+$video-big-play-dimensions: 2rem;
+$video-big-play-left-offset: 0.4rem;
+$video-small-play-left-offset: 0.2rem;
+$video-fill: $color0;

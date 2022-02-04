@@ -1,46 +1,50 @@
 @use 'sass:color';
-@use '../variables.scss' as *;
-@use '../_mixins.scss' as *;
+@use '../variables' as *;
+@use '../mixins' as *;
+@use '../defaults' as *;
 
 button, .button {
-    display: inline-block;
+    display:  $default-button-display;
 
-    padding: 1.2rem 4rem;
-    border: none;
-    border-radius: 0.5rem;
+    padding: $default-button-padding;
+    border: $default-button-border;
+    border-radius: $default-button-border-radius;
+    outline: $default-button-outline;
 
-    background-color: $color3;
-    color: $color0;
+    background-color: $default-button-background-color;
+    color: $default-button-color;
 
-    font-size: 1.6rem;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 1;
+    font-size: $default-button-font-size;
+    font-weight: $default-button-font-weight;
+    text-decoration: $default-button-text-decoration;
+    line-height: $default-button-line-height;
 
-    cursor: pointer;
-
-    transition: all $timing-1;
+    cursor: $default-button-cursor;
+    transition: $default-button-transition;
 
     &:hover {
-        background-color: color.adjust($color3, $lightness: -10%);
-        color: $color0;
+        outline: $default-button-hover-outline;
+
+        background-color: $default-button-hover-background-color;
+        color: $default-button-color;
     }
 
     &:focus {
-        outline: solid 0.2rem $color2;
-        color: $color0;
+        outline: $default-button-focus-outline;
+        
+        color: $default-button-color;
     }
 }
 
 .button--secondary {
-    background-color: $color2;
+    background-color: $default-button-secondary-background-color;
 
     &:hover {
-        background-color: color.adjust($color2, $lightness: 10%);
+        background-color: $default-button-secondary-hover-background-color;
     }
 
     &:focus {
-        outline-color: $color3;
+        outline-color: $default-button-secondary-focus-outline;
     }
 }
 
@@ -51,12 +55,12 @@ button, .button {
     border: solid 0.2rem $color0;
     border-radius: 50%;
 
-    background-color: $color6;
+    background-color: $default-button-video-background-color;
 
     transition: transform $timing-1, opacity $timing-2, background-color $timing-1;
     
     &:hover, &:focus {
-        background-color: $color6;
+        background-color: $color3;
         transform: scale(1.1);
     }
 
@@ -93,11 +97,11 @@ button, .button {
         outline: none;
 
         background-color: transparent;
-        color: $color6;
+        color: $color3;
     }
 
     &.active {
-        color: $color6;
+        color: $color3;
     }
 }
 
@@ -115,5 +119,20 @@ button, .button {
 
     .button--fullscreen + & {
         margin-left: 1rem;
+    }
+}
+
+.button--input {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: scale(1) translateY(-50%);
+
+    padding: 0;
+
+    background-color: transparent;
+
+    &:hover, &:focus {
+        background-color: transparent;
     }
 }

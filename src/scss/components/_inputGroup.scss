@@ -1,0 +1,13 @@
+@use '../variables' as *;
+
+.inputGroup {
+    display: inline-block;
+
+    position: relative;
+    
+    border: none;
+    border-bottom: solid 0.1rem $color4;
+
+    background-color: $color6;
+    box-shadow: $boxShadow2;
+}

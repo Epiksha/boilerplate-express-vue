@@ -1,13 +1,16 @@
-@use '../variables' as *;
+@use '../defaults' as *;
 @use '../mixins' as *;
+@use '../variables' as *;
 
 .icon {
-    display: inline-block;
-    vertical-align: middle;
+    display: $default-icon-display;
+    vertical-align: $default-icon-vertical-align;
 
     position: relative;
 
-    @include icon-dimensions(3.6rem);
+    @include icon-dimensions($default-icon-dimensions);
+
+    transition: $default-icon-transition;
 
     svg {
         position: absolute;
@@ -18,57 +21,97 @@
         width: 100%;
         height: 100%;
 
-        fill: $color1;
+        fill: $default-icon-fill;
 
-        transition: fill $timing-1;
-
-        .button--primary & {
-            fill: $color0;
-        }
+        transition: $default-icon-svg-transition;
     }
 
     &--checkbox {
         position: absolute;
-        top: 0.5rem;
-        left: 0.4rem;
+        top: $default-icon-checkbox-top;
+        left: $default-icon-checkbox-left;
 
-        @include icon-dimensions(1.6rem);
+        @include icon-dimensions($default-icon-checkbox-dimensions);
 
-        opacity: 0;
+        opacity: $default-icon-checkbox-opacity;
 
-        transition: all $timing-1;
+        transition: $default-icon-checkbox-transition;
 
-        .checkbox:hover &, input[type=checkbox]:focus + & {
-            opacity: 0.2;
+        .checkbox:hover & {
+            opacity: $default-icon-checkbox-hover-opacity
+        }
+
+        input[type=checkbox]:focus + & {
+            opacity: $default-icon-checkbox-focus-opacity
         }
 
         input[type=checkbox]:checked + & {
-            opacity: 1;
+            opacity: $default-icon-checkbox-selected-opacity;
 
             svg {
-                fill: $color2;
+                fill: $default-icon-checkbox-selected-fill;
             }
         }
     }
 
     &--video {
-        @include icon-dimensions(1.8rem);
+        @include icon-dimensions($default-icon-video-dimensions);
         pointer-events: none;
         
         .button--bigPlay & {
-            @include icon-dimensions(2rem);
+            @include icon-dimensions($default-icon-video-big-play-dimensions);
         }
 
         svg {
-            fill: $color0;
+            fill: $default-icon-video-fill;
+        }
+
+        &.icon--play {
+            margin-left: $default-icon-video-small-play-left-offset;
+            
+            .button--bigPlay & {
+                margin-left: $default-icon-video-big-play-left-offset;
+            }
         }
     }
 
-    &--play {
-        margin-left: 0.2rem;
+    &--input {
+        position: absolute;
+        top: 50%;
+        right: $default-input-icon-offset;
+        transform: translateY(-50%);
+
+        .button--input & {
+            position: static;
+        }
+
+        svg {
+            fill: $default-input-icon-color;
+        }
+
+        &.icon--email {
+            right: $default-icon-email-offset;
+
+            @include icon-dimensions($default-icon-email-dimensions);
+
+            svg {
+                fill: $default-icon-email-fill;
+            }
+        }
         
-        .button--bigPlay & {
-            margin-left: 0.4rem;
+        &.icon--password {
+            position: static;
+            transform: none;
+
+            @include icon-dimensions($default-icon-password-dimensions);
+
+            svg {
+                fill: $default-icon-password-fill;
+            }
+
+            .button--input:hover & svg {
+                fill: $default-icon-password-hover-fill;
+            }
         }
     }
 }

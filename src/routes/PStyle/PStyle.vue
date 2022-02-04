@@ -1,11 +1,7 @@
 <template>
     <div class="styleguide container py-4">
-        <router-link
-            to="/"
-        >
-            Home
-        </router-link>
-
+        <h1>Styleguide</h1>
+        
         <!-- Buttons -->
         <section class="styleguide__buttons">
             <h2>Buttons</h2>
@@ -98,7 +94,49 @@
                 aria-label="Styleguide Example Range Slider 3"
                 :is-labelled="false"
                 :is-tooltipped="false"
-                :colors="{ progress: 'green', track: '#cccccc' }"
+                :colors="{ progress: 'orange', track: '#cccccc' }"
+            />
+
+            <h3 class="mt-4">
+                Email
+            </h3>
+
+            <GInput
+                id="styleguide-email"
+                v-model="email"
+                class="mt"
+                label="Your Email:"
+                type="email"
+                placeholder="Email"
+                :required="true"
+            />
+
+            <h3 class="mt-4">
+                Password
+            </h3>
+                
+            <GInput
+                id="styleguide-password"
+                v-model="password"
+                class="mt"
+                label="Your Password:"
+                type="password"
+                placeholder="Password"
+                :required="true"
+            />
+            
+            <h3 class="mt-4">
+                Text
+            </h3>
+                
+            <GInput
+                id="styleguide-text"
+                v-model="text"
+                class="mt"
+                label="Your Text:"
+                type="text"
+                placeholder="Text"
+                :required="true"
             />
         </section>
 

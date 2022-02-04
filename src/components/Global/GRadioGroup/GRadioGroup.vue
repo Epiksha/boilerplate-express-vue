@@ -18,8 +18,6 @@
                 :value="radio.label"
             >
 
-            <div class="radio__circle"></div>
-            
             <span
                 :id="`${id}-radio-${index + 1}`"
                 :for="radio.id"

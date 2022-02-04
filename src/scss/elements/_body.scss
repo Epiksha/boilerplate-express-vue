@@ -1,0 +1,11 @@
+@use '../defaults' as *;
+
+body {
+    margin: 0;
+
+    font-size: $default-font-size;
+    font-family: $default-font-family;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}

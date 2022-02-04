@@ -1,0 +1,9 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+$color: $color3;
+$font-weight: 600;
+$text-decoration: none;
+$transition: all $timing-1;
+$hover-color: color.adjust($color3, $lightness: -10%);
+$focus-color: color.adjust($color3, $lightness: -10%);

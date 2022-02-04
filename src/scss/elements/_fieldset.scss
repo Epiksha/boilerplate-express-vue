@@ -1,10 +1,15 @@
 @use '../variables.scss' as *;
 
-fieldset {
+fieldset, .fieldset {
     text-align: left;
 
     box-sizing: border-box;
     padding: 0;
     border: none;
     outline: none;
+}
+
+.fieldset--input {
+    display: flex;
+    flex-direction: column;
 }

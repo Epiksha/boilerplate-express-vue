@@ -1,0 +1,74 @@
+@use '../variables' as *;
+@use 'icon' as icon;
+
+$box-sizing: border-box;
+
+$icon-offset: 2rem;
+$icon-size: 2.4rem;
+$icon-color: $color3;
+
+// Checkbox
+$checkbox-width: 2.4rem;
+$checkbox-height: 2.4rem;
+$checkbox-border: none;
+$checkbox-border-radius: 0.5rem;
+
+$checkbox-background-color: $color4;
+
+$checkbox-cursor: pointer;
+$checkbox-transition: background-color $timing-1;
+
+// Email
+$email-box-sizing: border-box;
+$email-width: 100%;
+$email-padding: 1rem;
+$email-border: none;
+$email-focus-outline: solid 0.1rem $color1;
+$email-right-offset: calc(#{icon.$email-offset * 2} + #{icon.$email-dimensions});
+
+$email-background-color: transparent;
+
+$email-font-size: 1.6rem;
+
+// Password
+$password-box-sizing: border-box;
+$password-width: 100%;
+$password-padding: 1rem;
+$password-border: none;
+$password-focus-outline: solid 0.1rem $color1;
+$password-icon-offset: 2rem;
+$password-icon-size: 2.4rem;
+$password-icon-color: $color3;
+$password-right-offset: calc(#{$icon-offset * 2} + #{$icon-size});
+
+$password-background-color: transparent;
+
+$password-font-size: 1.6rem;
+
+// Radio
+$radio-width: 2rem;
+$radio-height: 2rem;
+$radio-dot-width: 60%;
+$radio-dot-height: 60%;
+$radio-border: none;
+$radio-border-radius: 50%;
+$radio-dot-border-radius: 50%;
+
+$radio-background-color: $color4;
+$radio-dot-background-color: $color3;
+
+$radio-dot-inactive-opacity: 0;
+$radio-dot-active-opacity: 1;
+$radio-cursor: pointer;
+$radio-transition: background-color $timing-1;
+
+// Text
+$text-box-sizing: border-box;
+$text-width: 100%;
+$text-border: none;
+$text-padding: 1rem;
+$text-focus-outline: solid 0.1rem $color1;
+
+$text-background-color: transparent;
+
+$text-font-size: 1.6rem;

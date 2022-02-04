@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use '../variables' as *;
+@use '../defaults' as *;
 
 .videoPlayer {
     position: relative;
@@ -66,7 +67,7 @@
         width: 100%;
         padding: 1rem 2rem;
 
-        background-color: $color5;
+        background-color: $default-video-controls-background-color;
 
         &__inner {
             display: flex;

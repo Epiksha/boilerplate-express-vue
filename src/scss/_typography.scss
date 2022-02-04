@@ -1,0 +1,9 @@
+@use 'mixins';
+@use 'variables' as *;
+
+@include mixins.font-import('Roboto', 'Roboto-Regular.ttf', 400, normal);
+@include mixins.font-import('Roboto', 'Roboto-Italic.ttf', 400, italic);
+@include mixins.font-import('Roboto', 'Roboto-Bold.ttf', 600, normal);
+@include mixins.font-import('Roboto', 'Roboto-BoldItalic.ttf', 600, italic);
+@include mixins.font-import('Roboto', 'Roboto-Light.ttf', 300, normal);
+@include mixins.font-import('Roboto', 'Roboto-LightItalic.ttf', 300, italic);

@@ -1,0 +1,34 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+// Global Button
+$display: inline-block;
+
+$padding: 1.2rem 4rem;
+$border: none;
+$border-radius: 0.5rem;
+$outline: none;
+$hover-outline: none;
+$focus-outline: solid 0.2rem $color2;
+
+$background-color: $color3;
+$color: $color0;
+$hover-background-color: color.adjust($background-color, $lightness: -10%);
+
+$font-size: 1.6rem;
+$font-weight: 600;
+$line-height: 1;
+$text-decoration: none;
+
+$cursor: pointer;
+$transition: all $timing-1;
+
+// Secondary Button
+$secondary-focus-outline: solid 0.2rem $color3;
+
+$secondary-background-color: $color2;
+$secondary-color: $color0;
+$secondary-hover-background-color: color.adjust($secondary-background-color, $lightness: -10%);
+
+// Video Button
+$video-background-color: $color3;

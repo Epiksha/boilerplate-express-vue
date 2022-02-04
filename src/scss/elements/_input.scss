@@ -1,6 +1,64 @@
 @use 'sass:color';
-@use '../variables.scss' as *;
-@use '../_mixins.scss' as *;
+@use '../variables' as *;
+@use '../defaults' as *;
+@use '../mixins' as *;
+
+input[type=checkbox] {
+    width: $default-input-checkbox-width;
+    height: $default-input-checkbox-height;
+    margin: 0;
+    border: $default-input-checkbox-border;
+    border-radius: $default-input-checkbox-border-radius;
+
+    background-color: $default-input-checkbox-background-color;
+
+    appearance: none;
+    cursor: $default-input-checkbox-cursor;
+    transition: $default-input-checkbox-transition;
+
+    &:checked {
+        background-color: $color3;
+    }
+}
+
+input[type=radio] {
+    position: relative;
+
+    width: $default-input-radio-width;
+    height: $default-input-radio-height;
+    margin: 0;
+    border: $default-input-radio-border;
+    border-radius: $default-input-radio-border-radius;
+
+    background-color: $default-input-radio-background-color;
+
+    appearance: none;
+    cursor: $default-input-radio-cursor;
+    transition: $default-input-radio-transition;
+
+    &:before {
+        content: '';
+        display: block;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: $default-input-radio-dot-width;
+        height: $default-input-radio-dot-height;
+        border-radius: $default-input-radio-dot-border-radius;
+
+        background-color: $default-input-radio-dot-background-color;
+
+        opacity: $default-input-radio-dot-inactive-opacity;
+        pointer-events: none;
+    }
+
+    &:checked:before {
+        opacity: $default-input-radio-dot-active-opacity;
+    }
+}
 
 input[type=range] {
     width: 100%;
@@ -29,61 +87,49 @@ input[type=range] {
     }
 }
 
-input[type=checkbox] {
-    width: 2.4rem;
-    height: 2.4rem;
-    margin: 0;
-    border: none;
-    border-radius: 0.5rem;
+input[type=text] {
+    box-sizing: $default-input-text-box-sizing;
+    width: $default-input-text-width;
+    padding: $default-input-text-padding;
+    border: $default-input-text-border;
+    
+    background-color: $default-input-text-background-color;
 
-    background-color: $color4;
+    font-size: $default-input-text-font-size;
 
-    transition: background-color $timing-1;
-
-    appearance: none;
-    cursor: pointer;
-
-    &:checked {
-        background-color: $color6;
+    &:focus {
+        outline: $default-input-text-focus-outline;
     }
 }
 
-input[type=radio] {
-    position: relative;
+input[type=email] {
+    box-sizing: $default-input-email-box-sizing;
+    width: $default-input-email-width;
+    padding: $default-input-email-padding;
+    padding-right: $default-input-email-right-offset;
+    border: $default-input-email-border;
 
-    width: 2rem;
-    height: 2rem;
-    margin: 0;
-    border: none;
-    border-radius: 50%;
+    background-color: $default-input-email-background-color;
 
-    background-color: $color4;
+    font-size: $default-input-email-font-size;
 
-    transition: background-color $timing-1;
-
-    appearance: none;
-    cursor: pointer;
-
-    &:checked:before {
-        opacity: 1;
+    &:focus {
+        outline: $default-input-email-focus-outline;
     }
+}
 
-    &:before {
-        content: '';
-        display: block;
+input[type=password] {
+    box-sizing: $default-input-password-box-sizing;
+    width: $default-input-password-width;
+    padding: $default-input-password-padding;
+    padding-right: $default-input-password-right-offset;
+    border: $default-input-password-border;
 
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    background-color: $default-input-password-background-color;
 
-        width: 60%;
-        height: 60%;
-        border-radius: 50%;
+    font-size: $default-input-password-font-size;
 
-        background-color: $color6;
-
-        opacity: 0;
-        pointer-events: none;
+    &:focus {
+        outline: $default-input-password-focus-outline;
     }
 }

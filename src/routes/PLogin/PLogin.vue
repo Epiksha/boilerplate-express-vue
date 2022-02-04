@@ -1,13 +1,36 @@
 <template>
-    <div>
+    <div class="login">
         <div class="container py-4">
             <h1>Login</h1>
-            
-            <router-link
-                to="/"
+
+            <form
+                action="submit"
             >
-                Home
-            </router-link>
+                <GInput
+                    id="login-email"
+                    v-model="form.email"
+                    label="Email"
+                    type="email"
+                    placeholder="Email"
+                    :required="true"
+                />
+                
+                <GInput
+                    id="login-password"
+                    v-model="form.password"
+                    label="Password"
+                    type="password"
+                    placeholder="Password"
+                    :required="true"
+                />
+
+                <button
+                    class="button"
+                    type="submit"
+                >
+                    Login
+                </button>
+            </form>
         </div>
     </div>
 </template>

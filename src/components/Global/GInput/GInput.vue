@@ -1,6 +1,6 @@
 <template>
     <fieldset
-        class="fieldset"
+        class="fieldset fieldset--input"
         :class="[{'active': active}, {'error': errors && errors.length}]"
     >
         <label
@@ -8,10 +8,11 @@
             :id="`${id}-label`"
             :for="id"
             :class="{'active': focused}"
+            class="label label--fieldset"
             v-text="label"
         />
 
-        <div class="inputWrapper">
+        <div class="inputGroup">
             <input
                 :id="id"
                 class="input"
@@ -30,25 +31,25 @@
 
             <GIcon
                 v-if="errors && errors.length && type !== 'password'"
-                name="icon-warning"
-                class="icon--md icon--error"
+                name="icon-error"
+                class="icon--input icon--error"
             />
             
             <GIcon
                 v-else-if="type === 'email'"
                 name="icon-email"
-                class="icon--md icon--email"
+                class="icon--input icon--email"
             />
 
             <button
                 v-if="type === 'password'"
-                class="button button--visible"
+                class="button button--input"
                 tabindex="-1"
                 @click.prevent="() => isShowingPassword = !isShowingPassword"
             >
                 <GIcon
                     name="icon-visible"
-                    class="icon--visible"
+                    class="icon--input icon--password"
                 />
             </button>
         </div>

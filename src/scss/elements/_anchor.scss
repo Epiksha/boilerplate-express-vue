@@ -1,15 +1,18 @@
-@use 'sass:color';
-@use '../variables' as *;
+@use '../defaults' as *;
 
 a {
-    color: $color3;
+    color: $default-anchor-color;
 
-    font-weight: bold;
-    text-decoration: none;
+    font-weight: $default-anchor-font-weight;
+    text-decoration: $default-anchor-text-decoration;
 
-    transition: all $timing-1;
+    transition: $default-anchor-transition;
 
-    &:hover, &:focus {
-        color: color.adjust($color3, $lightness: -10%);
+    &:hover {
+        color: $default-anchor-hover-color;
+    }
+
+    &:focus {
+        color: $default-anchor-focus-color;
     }
 }

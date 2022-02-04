@@ -1,5 +1,9 @@
 @use '../variables.scss' as *;
 
+ul, ol {
+    margin: 0;
+}
+
 .list {
     // Global
     margin: 0;
