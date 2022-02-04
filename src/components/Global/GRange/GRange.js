@@ -118,5 +118,11 @@ export default {
         if (this.isTooltipped && this.tooltip && this.tooltip.isPermanent) {
             this.isTooltipActive = true;
         }
+
+        window.addEventListener('resize', this.calculateTooltipPosition);
+    },
+
+    beforeDestroy() {
+        window.removeEventListener('resize', this.calculateTooltipPosition);
     },
 };

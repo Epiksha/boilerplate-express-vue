@@ -49,13 +49,20 @@ button, .button {
 }
 
 .button--video {
-    width: 4rem;
-    height: 4rem;
+    width: 2.4rem;
+    height: 2.4rem;
     padding: 0;
-    border: solid 0.2rem $color0;
-    border-radius: 50%;
 
-    background-color: $default-button-video-background-color;
+    background-color: transparent;
+    
+    @media (min-width: $tablet) {
+        width: 4rem;
+        height: 4rem;
+        border: solid 0.2rem $color0;
+        border-radius: 50%;
+        
+        background-color: $default-button-video-background-color;
+    }
 
     transition: transform $timing-1, opacity $timing-2, background-color $timing-1;
     
@@ -72,6 +79,10 @@ button, .button {
 
         width: 6rem;
         height: 6rem;
+        border: solid 0.2rem $color0;
+        border-radius: 50%;
+        
+        background-color: $default-button-video-background-color;
 
         opacity: 0;
         pointer-events: none;
@@ -134,5 +145,15 @@ button, .button {
 
     &:hover, &:focus {
         background-color: transparent;
+    }
+}
+
+.button--login {
+    display: block;
+    width: 100%;
+    margin: 4rem auto 0;
+
+    @media (min-width: $tablet) {
+        width: auto;
     }
 }

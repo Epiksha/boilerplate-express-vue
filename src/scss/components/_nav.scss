@@ -1,34 +1,94 @@
 @use 'sass:color';
 @use '../variables' as *;
+@use '../defaults' as *;
 
 .nav {
     $root: &;
 
+    position: absolute;
+    top: 100%;
+    transform: scaleY(0);
+    transform-origin: top left;
+
+    overflow: hidden;
+    width: 100%;
+    border-top: solid 0.1rem $color4;
+
+    background-color: $color0;
+
+    opacity: 0;
+    transition: transform $timing-1, opacity $timing-1;
+
+    &.active {
+        transform: scaleY(1);
+
+        opacity: 1;
+    }
+
+    &.transitionless {
+        transition: none;
+    }
+
+    @media (min-width: $tablet) {
+        flex-grow: 0;
+
+        position: static;
+        transform: none;
+
+        overflow: visible;
+        width: auto;
+        border-top: none;
+
+        opacity: 1;
+        transition: none;
+    }
+
     &__list {
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
 
         list-style: none;
         padding-left: 0;
+
+        @media (min-width: $tablet) {
+            flex-direction: row;
+        }
         
         #{$root}__item {
-            margin-right: 2rem;
+            text-align: center;
 
-            &:last-child {
-                margin-right: 0;
+            width: 100%;
+            border-bottom: solid 0.1rem $color4;
+
+            @media (min-width: $tablet) {
+                margin-right: 2rem;
+                border-bottom: none;
+
+                &:last-child {
+                    margin-right: 0;
+                }
             }
 
             #{$root}__link {
-                padding: 0;
+                display: block;
+
+                box-sizing: border-box;
+                width: 100%;
+                padding: 1.5rem;
 
                 background-color: transparent;
                 color: $color3;
 
                 &:hover {
+                    background-color: transparent;
                     color: color.adjust($color3, $lightness: -10%);
                 }
 
                 &.active {
+                    background-color: transparent;
                     color: $color2;
                 }
             }

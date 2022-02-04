@@ -17,6 +17,7 @@
     }
 
     &__label {
+        font-size: 1.6rem;
         font-weight: bold;
         line-height: 1;
         
@@ -30,6 +31,8 @@
 
         #{$root}--video & {
             color: $color0;
+
+            font-size: 1.2rem;
         }
     }
 

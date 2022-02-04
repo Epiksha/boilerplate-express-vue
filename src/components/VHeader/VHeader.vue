@@ -3,7 +3,7 @@
         class="header"
         :class="{'deactive': this.$route.fullPath === '/login'}"
     >
-        <div class="header__container container">
+        <div class="header__container tablet:container">
             <div class="header__logo">
                 <router-link
                     class="header__title"
@@ -13,7 +13,30 @@
                 </router-link>
             </div>
 
-            <nav class="nav">
+            <button
+                ref="hamburger"
+                class="hamburger"
+                :class="{'active': isNavActive}"
+                aria-label="Open menu"
+                @click="toggleNavigation"
+            >
+                <span class="hamburger__line hamburger__line--1" />
+
+                <span class="hamburger__line hamburger__line--2" />
+
+                <span class="hamburger__line hamburger__line--3" />
+
+                <span class="hamburger__line hamburger__line--4" />
+            </button>
+
+            <nav
+                v-clickaway="closeNavigation"
+                class="nav"
+                :class="[
+                    {'active': isNavActive},
+                    {'transitionless': disableTransitions}
+                ]"
+            >
                 <ul class="nav__list">
                     <template v-for="link in navLinks">
                         <li
@@ -24,6 +47,7 @@
                             <button
                                 v-if="link.callback"
                                 class="nav__link"
+                                :aria-label="`Link to ${link.text}`"
                                 @click="link.callback.call(link.context)"
                             >
                                 {{ link.text }}

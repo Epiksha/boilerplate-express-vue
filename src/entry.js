@@ -24,7 +24,7 @@ globals.forEach(component => {
 
 // Plugins, Directives & Keycodes
 plugins.forEach(plugin => Vue.use(plugin));
-directives.forEach(directive => Vue.directive(directive.name, directive.config));
+directives.forEach(({ name, config }) => Vue.directive(name, config));
 Vue.config.keyCodes = keyCodes;
 
 // Prop Validation

@@ -1,10 +1,13 @@
 @use '../defaults' as *;
+@use '../variables' as *;
 
 .login {
     $root: &;
 
     display: flex;
     align-items: center;
+
+    position: relative;
 
     height: 100vh;
 
@@ -13,18 +16,67 @@
     }
 
     &__container {
-        flex-basis: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 90%;
+        border-radius: 1rem;
+
+        background-color: $color0;
+
+        @media (min-width: $tablet) {
+            flex-basis: 50%;
+
+            position: static;
+            transform: none;
+
+            background-color: transparent;
+        }
 
         box-sizing: border-box;
 
         #{$root}__inner {
-            max-width: 45rem;
             margin: auto;
+
+            @media (min-width: $tablet) {
+                max-width: 45rem;
+            }
+        }
+
+        #{$root}__links {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            margin-top: 2rem;
+            padding: 0 0.1rem;
+
+            font-size: 1.4rem;
+
+            @media (min-width: $mobile) {
+                flex-direction: row;
+            }
+
+            a {
+                margin-top: 1rem;
+
+                @media (min-width: $tablet) {
+                    margin-top: 0;
+                }
+            }
         }
     }
 
     &__image {
-        flex-basis: 50%;
+        width: 100%;
         height: 100%;
+
+        @media (min-width: $tablet) {
+            flex-basis: 50%;
+            
+            width: auto;
+        }
     }
 }

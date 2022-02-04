@@ -2,9 +2,25 @@
 @use '../variables.scss' as *;
 
 .styleguide {
+    h1 {
+        text-align: center;
+
+        @media (min-width: $tablet) {
+            text-align: left;
+        }
+    }
+
     section {
         padding: 0 0 4rem;
         border-bottom: solid 0.1rem $color4;
+    }
+
+    section > h2 {
+        text-align: center;
+
+        @media (min-width: $tablet) {
+            text-align: left;
+        }
     }
 
     section > h2:first-child {
@@ -13,5 +29,51 @@
 
     section:first-child > h2 {
         margin-top: 0;
+    }
+
+    section h3 {
+        text-align: center;
+
+        @media (min-width: $tablet) {
+            text-align: left;
+        }
+        
+        margin-bottom: 2rem;
+
+        line-height: 1.25;
+    }
+
+    &__buttons > div {
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: $tablet) {
+            display: block;
+            text-align: left;
+        }
+        
+        .button, a {
+            text-align: center;
+
+            margin-top: 2rem;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    section#{&}__typography {
+        text-align: center;
+
+        @media (min-width: $tablet) {
+            text-align: left;
+        }
+
+        h3 {
+            margin-bottom: 0;
+            
+            line-height: 1;
+        }
     }
 }

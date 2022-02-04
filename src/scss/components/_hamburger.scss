@@ -1,0 +1,88 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.hamburger {
+    $root: &;
+
+    position: relative;
+    transform: rotate(0deg);
+
+    width: 4rem;
+    height: 3rem;
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+
+    transition: $timing-2 ease-in-out;
+    cursor: pointer;
+
+    @media (min-width: $tablet) {
+        display: none;
+    }
+
+    &:hover, &:focus {
+        background-color: transparent;
+
+        outline: none;
+
+        span {
+            background-color: color.adjust($color3, $lightness: -10%);
+        }
+    }
+
+    &__line {
+        display: block;
+
+        position: absolute;
+        left: 0;
+        transform: rotate(0deg);
+
+        height: 0.5rem;
+        width: 100%;
+        background-color: $color3;
+        border-radius: 0.5rem;
+
+        opacity: 1;
+        transition: $timing-1 ease-in-out;
+
+        &--1 {
+            top: 0;
+
+            #{$root}.active & {
+                top: 1.2rem;
+                left: 50%;
+
+                width: 0%;
+            }
+        }
+        
+        &--2,
+        &--3 {
+            top: 1.2rem;
+        }
+
+        &--2 {
+            #{$root}.active & {
+                transform: rotate(45deg);
+            }
+        }
+        
+        &--3 {
+            #{$root}.active & {
+                transform: rotate(-45deg);
+            }
+        }
+        
+        &--4 {
+            top: 2.4rem;
+
+            #{$root}.active & {
+                top: 1.2rem;
+                left: 50%;
+
+                width: 0%;
+            }
+        }
+    }
+}

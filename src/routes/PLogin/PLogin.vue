@@ -1,13 +1,6 @@
 <template>
     <div class="login">
         <div class="login__container container p-4">
-            <router-link
-                to="/"
-                class="absolute top-4 left-4"
-            >
-                Home
-            </router-link>`
-
             <div class="login__inner">
                 <h1>Login</h1>
 
@@ -41,8 +34,22 @@
                         :errors="errors.default"
                     />
 
+                    <div class="login__links">
+                        <router-link
+                            to="/register"
+                        >
+                            Don't have an account?
+                        </router-link>
+
+                        <router-link
+                            to="/"
+                        >
+                            Back to home
+                        </router-link>
+                    </div>
+
                     <button
-                        class="button mt-4"
+                        class="button button--login"
                         type="submit"
                         @click.prevent="submit"
                     >

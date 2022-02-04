@@ -6,29 +6,31 @@
         <section class="styleguide__buttons">
             <h2>Buttons</h2>
 
-            <button>Submit</button>
+            <div>
+                <button>Submit</button>
 
-            <button class="button button--secondary">
-                Submit
-            </button>
-            
-            <router-link
-                to="/styleguide"
-                class="button"
-            >
-                Link with button class
-            </router-link>
-            
-            <router-link
-                to="/styleguide"
-                class="mx-2"
-            >
-                Default Link
-            </router-link>
+                <button class="button button--secondary">
+                    Submit
+                </button>
+                
+                <router-link
+                    to="/styleguide"
+                    class="button"
+                >
+                    Link with button class
+                </router-link>
+                
+                <router-link
+                    to="/styleguide"
+                    class="mx-2"
+                >
+                    Default Link
+                </router-link>
+            </div>
         </section>
 
         <!-- Inputs -->
-        <section class="styleguide__typography">
+        <section class="styleguide__inputs">
             <h2>Inputs</h2>
 
             <GCheckboxGroup

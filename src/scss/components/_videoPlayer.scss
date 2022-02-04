@@ -80,4 +80,9 @@
 
         margin: 0 2rem;
     }
+
+    &__options {
+        display: flex;
+        align-items: center;
+    }
 }
