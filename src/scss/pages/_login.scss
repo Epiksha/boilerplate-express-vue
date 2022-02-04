@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
 
-    height: calc(100vh - #{$default-header-height});
+    height: 100vh;
 
     &__form {
         margin-top: 4rem;

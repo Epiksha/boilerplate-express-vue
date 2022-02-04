@@ -1,10 +1,11 @@
 @use '../variables.scss' as *;
 @use '../defaults' as *;
 
-.label--fieldset {
-    margin-bottom: $default-label-fieldset-margin-bottom;
+.label {
+    margin-bottom: $default-label-margin-bottom;
 
-    color: $default-label-fieldset-color;
+    color: $default-label-color;
     
-    font-size: $default-label-fieldset-font-size;
+    font-size: $default-label-font-size;
+    font-weight: $default-label-font-weight;
 }

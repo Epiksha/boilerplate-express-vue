@@ -13,6 +13,10 @@
 
     line-height: 1;
 
+    &.deactive {
+        display: none;
+    }
+
     &__container {
         display: flex;
         justify-content: center;

@@ -94,11 +94,19 @@ input[type=text] {
     border: $default-input-text-border;
     
     background-color: $default-input-text-background-color;
+    color: $default-input-text-color;
 
     font-size: $default-input-text-font-size;
+    font-weight: $default-input-text-font-weight;
 
     &:focus {
         outline: $default-input-text-focus-outline;
+
+        color: $default-input-text-focus-color;
+    }
+
+    &::placeholder {
+        color: $default-input-text-placeholder-color;
     }
 }
 
@@ -110,11 +118,19 @@ input[type=email] {
     border: $default-input-email-border;
 
     background-color: $default-input-email-background-color;
+    color: $default-input-email-color;
 
     font-size: $default-input-email-font-size;
+    font-weight: $default-input-email-font-weight;
 
     &:focus {
         outline: $default-input-email-focus-outline;
+
+        color: $default-input-email-focus-color;
+    }
+
+    &::placeholder {
+        color: $default-input-email-placeholder-color;
     }
 }
 
@@ -126,10 +142,18 @@ input[type=password] {
     border: $default-input-password-border;
 
     background-color: $default-input-password-background-color;
+    color: $default-input-password-color;
 
     font-size: $default-input-password-font-size;
+    font-weight: $default-input-password-font-weight;
 
     &:focus {
         outline: $default-input-password-focus-outline;
+
+        color: $default-input-password-focus-color;
+    }
+
+    &::placeholder {
+        color: $default-input-password-placeholder-color;
     }
 }

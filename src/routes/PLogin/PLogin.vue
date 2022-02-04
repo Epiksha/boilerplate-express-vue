@@ -1,6 +1,13 @@
 <template>
     <div class="login">
         <div class="login__container container p-4">
+            <router-link
+                to="/"
+                class="absolute top-4 left-4"
+            >
+                Home
+            </router-link>`
+
             <div class="login__inner">
                 <h1>Login</h1>
 

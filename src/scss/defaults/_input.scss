@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../variables' as *;
 @use 'icon' as icon;
 
@@ -21,29 +22,37 @@ $checkbox-transition: background-color $timing-1;
 // Email
 $email-box-sizing: border-box;
 $email-width: 100%;
-$email-padding: 1rem;
+$email-padding: 1.5rem;
 $email-border: none;
-$email-focus-outline: solid 0.1rem $color1;
+$email-focus-outline: solid 0.1rem $color3;
 $email-right-offset: calc(#{icon.$email-offset * 2} + #{icon.$email-dimensions});
 
 $email-background-color: transparent;
+$email-color: $color1;
+$email-focus-color: $color1;
+$email-placeholder-color: color.adjust($color1, $alpha: -0.7);
 
 $email-font-size: 1.6rem;
+$email-font-weight: 600;
 
 // Password
 $password-box-sizing: border-box;
 $password-width: 100%;
-$password-padding: 1rem;
+$password-padding: 1.5rem;
 $password-border: none;
-$password-focus-outline: solid 0.1rem $color1;
+$password-focus-outline: solid 0.1rem $color3;
 $password-icon-offset: 2rem;
 $password-icon-size: 2.4rem;
 $password-icon-color: $color3;
 $password-right-offset: calc(#{$icon-offset * 2} + #{$icon-size});
 
 $password-background-color: transparent;
+$password-color: $color1;
+$password-focus-color: $color1;
+$password-placeholder-color: color.adjust($color1, $alpha: -0.7);
 
 $password-font-size: 1.6rem;
+$password-font-weight: 600;
 
 // Radio
 $radio-width: 2rem;
@@ -66,9 +75,13 @@ $radio-transition: background-color $timing-1;
 $text-box-sizing: border-box;
 $text-width: 100%;
 $text-border: none;
-$text-padding: 1rem;
-$text-focus-outline: solid 0.1rem $color1;
+$text-padding: 1.5rem;
+$text-focus-outline: solid 0.1rem $color3;
 
 $text-background-color: transparent;
+$text-color: $color1;
+$text-focus-color: $color1;
+$text-placeholder-color: color.adjust($color1, $alpha: -0.7);
 
 $text-font-size: 1.6rem;
+$text-font-weight: 600;

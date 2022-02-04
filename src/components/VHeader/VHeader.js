@@ -1,23 +1,30 @@
 export default {
-    data: () => ({
-        navLinks: [
-            {
-                text: 'Login',
-                url: '/login',
-                gated: false,
-            },
-            {
-                text: 'Logout',
-                url: '/logout',
-                gated: true,
-            },
-            {
-                text: 'Members',
-                url: '/members',
-                gated: true,
-            },
-        ],
-    }),
+    data() {
+        return {
+            navLinks: [
+                {
+                    isGated: false,
+                    text: 'Login',
+                    url: '/login',
+                },
+                {
+                    callback: async () => {
+                        await this.$store.dispatch('user/remove');
+                        this.$router.push('/');
+                    },
+                    context: this,
+                    isGated: true,
+                    text: 'Logout',
+                    url: '/logout',
+                },
+                {
+                    isGated: true,
+                    text: 'Members',
+                    url: '/members',
+                },
+            ],
+        };
+    },
 
     computed: {
         token() {

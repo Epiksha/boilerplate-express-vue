@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use '../variables' as *;
+
 .nav {
     $root: &;
 
@@ -13,6 +16,21 @@
 
             &:last-child {
                 margin-right: 0;
+            }
+
+            #{$root}__link {
+                padding: 0;
+
+                background-color: transparent;
+                color: $color3;
+
+                &:hover {
+                    color: color.adjust($color3, $lightness: -10%);
+                }
+
+                &.active {
+                    color: $color2;
+                }
             }
         }
     }
