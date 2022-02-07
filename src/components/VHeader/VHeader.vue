@@ -1,7 +1,7 @@
 <template>
     <header
         class="header"
-        :class="{'deactive': this.$route.fullPath === '/login'}"
+        :class="{'deactive': deactiveRoutes.indexOf(this.$route.fullPath) > -1}"
     >
         <div class="header__container tablet:container">
             <div class="header__logo">

@@ -25,6 +25,7 @@ export default {
                     url: '/members',
                 },
             ],
+            deactiveRoutes: ['/login', '/register'],
             timeout: null,
         };
     },
