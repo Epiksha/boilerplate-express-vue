@@ -7,7 +7,7 @@ const routes = require('./routes');
 
 require('./services/Database.service');
 
-// General App Setup
+// General setup
 const app = express();
 
 // Setup Middleware

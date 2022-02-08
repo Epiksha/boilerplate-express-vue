@@ -30,7 +30,6 @@ export default {
         },
     },
 
-    // Hello World
     methods: {
         async submit() {
             try {
