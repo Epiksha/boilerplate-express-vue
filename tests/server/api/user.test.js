@@ -108,14 +108,33 @@ describe('Users Endpoints', () => {
 			.send(data)
 			.expect(200)
 			.then(async (response) => {
-				console.log(response.body);
-
 				expect(JSON.stringify(response.body._id)).toBe(JSON.stringify(user._id));
 				expect(response.body.email).toBe(data.email);
 				
 				const newUser = await User.findOne({ _id: response.body._id });
 				expect(newUser).toBeTruthy();
 				expect(newUser.email).toBe(data.email);
+			});
+	});
+	
+	// Delete User
+	test('Delete /api/users/:id', async () => {
+		const user = await User.create({
+			email: 'test@test.com',
+			first_name: 'Jonathan',
+			full_name: 'Jonathan Smithson',
+			last_name: 'Smithson',
+			password: 'hello123',
+		})
+	
+		return await request(createServer())
+			.delete(`/api/users/${user._id}`)
+			.send()
+			.expect(200)
+			.then(async (response) => {
+				const newUser = await User.findOne({ _id: response.body._id });
+				
+				expect(newUser).toEqual(null);
 			});
 	});
 });
