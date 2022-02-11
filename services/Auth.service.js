@@ -5,6 +5,10 @@ const UserModel = require('../models/User.model');
 const { JWT_SECRET } = require('../config');
 
 class AuthService {
+    constructor() {
+        this.passwordExpiry = '2 minutes';
+    }
+
     async login(request) {
         const responseBody = {};
 
@@ -13,7 +17,6 @@ class AuthService {
 
             if (!user) {
                 responseBody.statusCode = 422;
-                responseBody.message = 'Could not create token.';
                 responseBody.errors = {
                     default: ['Invalid credentials.'],
                 };
@@ -25,7 +28,6 @@ class AuthService {
 
             if (!isPasswordCorrect) {
                 responseBody.statusCode = 422;
-                responseBody.message = 'Could not create token.';
                 responseBody.errors = {
                     default: ['Invalid credentials.'],
                 };
@@ -36,13 +38,12 @@ class AuthService {
             const token = jwt.sign(
                 { user_id: user._id, email: request.body.email },
                 JWT_SECRET,
-                { expiresIn: "2 minutes" }
+                { expiresIn: this.passwordExpiry }
             );
         
             user.token = token;
 
             responseBody.statusCode = 200;
-            responseBody.message = 'Successfully created token.';
             responseBody.data = {
                 email: user.email,
                 first_name: user.first_name,
@@ -53,7 +54,6 @@ class AuthService {
         } catch (error) {
             console.error(error);
             responseBody.statusCode = 500;
-            responseBody.message = 'The server encountered an error.';
             responseBody.errors = {
                 default: ['There was an issue connecting to the server. Please wait a moment and try again.'],
             };

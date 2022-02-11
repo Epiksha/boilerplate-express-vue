@@ -2,49 +2,55 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = require('../config');
-const UserModel = require('../models/User.model');
+const User = require('../models/User.model');
 
 class UserService {
-    async createUser(requestBody) {
+    async createUser(request) {
         const responseBody = {};
-        const full_name = `${requestBody.first_name} ${requestBody.last_name}`;
-        const userData = {...requestBody, full_name};
-
-        const encryptedPassword = await bcrypt.hash(requestBody.password, 10);
-        userData.password = encryptedPassword;
+        const full_name = `${request.body.first_name} ${request.body.last_name}`;
+        const userData = {...request.body, full_name};
 
         try {
-            const isUserFound = await UserModel.findOne({ 'email': requestBody.email });
+            const encryptedPassword = await bcrypt.hash(request.body.password, 10);
+            userData.password = encryptedPassword;
+
+            const isUserFound = await User.findOne({ 'email': request.body.email });
 
             if (isUserFound) {
-                responseBody.message = 'Could not create new account.';
                 responseBody.statusCode = 409;
+                responseBody.data = {
+                    errors: { default: 'There was an error creating user. Please try again.' },
+                };
+                
                 return responseBody;
             }
 
-            const user = await UserModel.create(userData);
+            const user = await User.create(userData);
 
             const token = jwt.sign(
-                { user_id: user._id, email: requestBody.email },
+                { user_id: user._id, email: request.body.email },
                 JWT_SECRET,
-                { expiresIn: "2 minutes" }
+                { expiresIn: '2 minutes' }
             );
             
             user.token = token;
 
-            responseBody.message = 'Successfully created user.';
-            responseBody.statusCode = 200;
+            responseBody.statusCode = 201;
             responseBody.data = {
                 email: user.email,
                 first_name: user.first_name,
                 full_name: user.full_name,
+                id: user._id,
                 last_name: user.last_name,
                 token: user.token,
             };
         } catch (error) {
             console.error(error);
-            responseBody.message = 'The server encountered an error.';
+
             responseBody.statusCode = 500;
+            responseBody.data = {
+                errors: { default: 'There was an error creating user. Please try again.' },
+            };
         }
 
         return responseBody;
@@ -54,7 +60,7 @@ class UserService {
         const responseBody = {};
 
         try {
-            const isUserFound = await UserModel.findById(id);
+            const isUserFound = await User.findById(id);
 
             if (!isUserFound) {
                 responseBody.message = 'Could not find user to delete';
@@ -62,7 +68,7 @@ class UserService {
                 return responseBody;
             }
 
-            await UserModel.deleteOne({ _id: id });
+            await User.deleteOne({ _id: id });
 
             responseBody.message = 'Successfully deleted user.';
             responseBody.statusCode = 200;
@@ -79,15 +85,17 @@ class UserService {
         const responseBody = {};
 
         try {
-            const result = await UserModel.find();
+            const result = await User.find();
     
-            responseBody.message = 'Successfully queried all users.';
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
             console.error(error);
-            responseBody.message = 'The server encountered an error.';
+
             responseBody.statusCode = 500;
+            responseBody.data = {
+                errors: { default: 'There was an error getting users. Please try again.' },
+            };
         }
 
         return responseBody;
@@ -97,55 +105,66 @@ class UserService {
         const responseBody = {};
 
         try {
-            const result = await UserModel.findById(id);
+            const result = await User.findById(id);
     
             if (!result) {
-                responseBody.message = 'Could not find user with provided id.';
                 responseBody.statusCode = 404;
+                responseBody.data = {
+                    errors: { default: 'Could not get user information. Please try again.' },
+                };
 
                 return responseBody;
             }
            
-            responseBody.message = 'Successfully found user.';
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
             console.error(error);
-            responseBody.message = 'The server encountered an error.';
+
             responseBody.statusCode = 500;
+            responseBody.data = {
+                errors: { default: 'Could not get user information. Please try again.' },
+            };
         }
 
         return responseBody;
     }
     
-    async updateUser(id, info) {
+    async updateUser(request) {
         const responseBody = {};
 
         try {
-            const isUserFound = await UserModel.findById(id);
+            const isUserFound = await User.findById(request.params.id);
 
             if (!isUserFound) {
-                responseBody.message = 'Could not find a user with the given id.';
                 responseBody.statusCode = 404;
+                responseBody.data = {
+                    errors: { default:  'Could not find a user with the provided id.' },
+                };
+
                 return responseBody;
             }
 
-            const result = await UserModel.findByIdAndUpdate(id, info);
-    
+            const result = await User.findByIdAndUpdate(request.params.id, request.body, { new: true });
+
             if (!result) {
-                responseBody.message = 'Could not find user with provided id.';
-                responseBody.statusCode = 404;
+                responseBody.statusCode = 500;
+                responseBody.data = {
+                    errors: { default: 'Could not update user information. Please try again.' },
+                };
 
                 return responseBody;
             }
            
-            responseBody.message = 'Successfully updated user.';
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
             console.error(error);
-            responseBody.message = 'The server encountered an error.';
+
             responseBody.statusCode = 500;
+            responseBody.data = {
+                errors: { default: 'Could not update user information. Please try again.' },
+            };
         }
 
         return responseBody;

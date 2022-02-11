@@ -5,7 +5,6 @@ const createSchema = Joi.object().keys({
     first_name: Joi.string().alphanum().min(5).max(20).required(),
     last_name: Joi.string().alphanum().min(5).max(20).required(),
     password: Joi.string().alphanum().min(5).max(40).required(),
-    username: Joi.string().alphanum().min(5).max(20).required(),
 });
 
 const deleteSchema = Joi.object().keys({
@@ -18,12 +17,10 @@ const getSchema = Joi.object().keys({
 
 const updateSchema = Joi.object().keys({
     email: Joi.string().email(),
-    first_name: Joi.string().alphanum().min(5).max(20),
+    first_name: Joi.string().alphanum().min(2).max(40),
     id: Joi.string().alphanum(),
-    last_name: Joi.string().alphanum().min(5).max(20),
+    last_name: Joi.string().alphanum().min(2).max(40),
     password: Joi.string().alphanum().min(5),
-    confirmed_password: Joi.string().alphanum().min(5).valid(Joi.ref('password')),
-    username: Joi.string().alphanum().min(5).max(20),
 }).min(1);
 
 class UserValidator {

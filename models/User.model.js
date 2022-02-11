@@ -26,11 +26,6 @@ const UserModel = new Schema({
         type: String,
         required: true,
     },
-
-    username: {
-        type: String,
-        required: true,
-    },
 }, { collection: 'users'});
 
 module.exports = model('User', UserModel);
