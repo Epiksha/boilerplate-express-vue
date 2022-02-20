@@ -9,10 +9,14 @@ class AuthService {
         this.passwordExpiry = '2 minutes';
     }
 
-    async login(request) {
+    async login(request, isTest = false) {
         const responseBody = {};
 
         try {
+            if (isTest) {
+                throw new Error('Testing error handling.');
+            }
+
             const user = await UserModel.findOne({ email: request.body.email });
 
             if (!user) {
@@ -66,10 +70,14 @@ class AuthService {
         );
     }
     
-    async validate(request) {
+    async validate(request, isTest = false) {
         const responseBody = {};
 
         try {
+            if (isTest) {
+                throw new Error('Testing error handling.');
+            }
+
             responseBody.statusCode = 200;
             responseBody.data = {
                 token: request.user.token,
