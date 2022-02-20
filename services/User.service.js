@@ -11,9 +11,6 @@ class UserService {
         const userData = {...request.body, full_name};
 
         try {
-            const encryptedPassword = await bcrypt.hash(request.body.password, 10);
-            userData.password = encryptedPassword;
-
             const isUserFound = await User.findOne({ 'email': request.body.email });
 
             if (isUserFound) {
@@ -25,13 +22,11 @@ class UserService {
                 return responseBody;
             }
 
-            const user = await User.create(userData);
+            const encryptedPassword = await this.encryptPassword(request.body.password);
+            userData.password = encryptedPassword;
 
-            const token = jwt.sign(
-                { user_id: user._id, email: request.body.email },
-                JWT_SECRET,
-                { expiresIn: '2 minutes' }
-            );
+            const user = await User.create(userData);
+            const token = this.signToken(user._id, request.body.email);
             
             user.token = token;
 
@@ -54,6 +49,18 @@ class UserService {
         }
 
         return responseBody;
+    }
+
+    async encryptPassword(password) {
+        return await bcrypt.hash(password, 10);
+    }
+
+    signToken(id, email) {
+        return jwt.sign(
+            { user_id: id, email: email },
+            JWT_SECRET,
+            { expiresIn: '2 minutes' }
+        );
     }
 
     async deleteUser(id) {

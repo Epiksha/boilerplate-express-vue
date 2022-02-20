@@ -35,11 +35,7 @@ class AuthService {
                 return responseBody;
             }
 
-            const token = jwt.sign(
-                { user_id: user._id, email: request.body.email },
-                JWT_SECRET,
-                { expiresIn: this.passwordExpiry }
-            );
+            const token = this.signToken(user._id, request.body.email);
         
             user.token = token;
 
@@ -61,20 +57,29 @@ class AuthService {
 
         return responseBody;
     }
+
+    signToken(user_id, email) {
+        return jwt.sign(
+            { user_id, email },
+            JWT_SECRET,
+            { expiresIn: this.passwordExpiry }
+        );
+    }
     
     async validate(request) {
         const responseBody = {};
 
         try {
-            responseBody.message = 'Token is valid.';
-            responseBody.statusCodeCode = 200;
+            responseBody.statusCode = 200;
             responseBody.data = {
                 token: request.user.token,
             };
         } catch (error) {
             console.error(error.details);
-            responseBody.message = 'The server encountered an error.';
-            responseBody.statusCodeCode = 500;
+            responseBody.statusCode = 500;
+            responseBody.errors = {
+                default: ['There was an issue connecting to the server. Please wait a moment and try again.'],
+            };
         }
 
         return responseBody;

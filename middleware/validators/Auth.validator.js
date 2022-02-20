@@ -2,7 +2,7 @@ const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = require('../../config');
-const utilities = require('../../libs/utilities');
+const { request: requestUtility } = require('../../libs/utilities');
 
 const loginSchema = Joi.object().keys({
     email: Joi.string().email(),
@@ -11,25 +11,35 @@ const loginSchema = Joi.object().keys({
 
 class AuthValidator {
     validateLogin(request, response, next) {
+        if (!request.body) {
+            const responseBody = {
+                errors: { default: 'No data passed in with the body of the request' },
+            };
+
+            response.status(422).send(responseBody);
+        }
+        
         const { error } = loginSchema.validate(request.body);
 
         if (error) {
-            response.status(422).send({
-                message: error.details.map(({ message }) => message),
-                data: request.body,
-            });
+            const responseBody = {
+                errors: {},
+            };
+
+            requestUtility.setJoiErrors(error, responseBody.errors);
+
+            response.status(422).send(responseBody);
         }
 
         next();
     }
 
     async validateToken(request, response, next) {
-        const token = utilities.request.extractToken(request);
+        const token = requestUtility.extractToken(request);
 
         if (!token) {
             response.status(401).send({
-                data: request.body,
-                message: 'No token passed in with request.',
+                errors: [{ default: 'No token passed in with request.' }],
             });
         }
 
@@ -39,19 +49,16 @@ class AuthValidator {
 
             next();
         } catch (error) {
-            let message;
-
-            if (error.message === 'jwt expired') {
-                message = 'Token has expired.';
-            } else {
-                message = 'Invalid token.'
-            }
+            const message = this.setTokenResponseError(error.message);
 
             response.status(401).send({
-                data: request.body,
-                message,
+                errors: [{ default: message }],
             });
         }
+    }
+
+    setTokenResponseError(message) {
+        return message === 'jwt expired' ? 'Token has expired.' : 'Invalid token.';
     }
 }
 

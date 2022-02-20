@@ -18,7 +18,7 @@ afterEach(done => {
 describe('Users Endpoints', () => {
 	// Get All Users
 	test('GET /api/users', async () => {
-		const post = await User.create({
+		const user = await User.create({
 			email: 'test@test.com',
 			first_name: 'Jonathan',
 			full_name: 'Jonathan Smithson',
@@ -35,16 +35,16 @@ describe('Users Endpoints', () => {
 				expect(response.body.length).toEqual(1);
 	
 				// Check the response data
-				expect(response.body[0].email).toBe(post.email);
-				expect(response.body[0].first_name).toBe(post.first_name);
-				expect(response.body[0].last_name).toBe(post.last_name)
-				expect(response.body[0].full_name).toBe(post.full_name)
+				expect(response.body[0].email).toBe(user.email);
+				expect(response.body[0].first_name).toBe(user.first_name);
+				expect(response.body[0].last_name).toBe(user.last_name)
+				expect(response.body[0].full_name).toBe(user.full_name)
 			});
 	});
 	
 	// Get Single User
 	test('GET /api/users/:id', async () => {
-		const post = await User.create({
+		const user = await User.create({
 			email: 'test@test.com',
 			first_name: 'Jonathan',
 			full_name: 'Jonathan Smithson',
@@ -53,13 +53,13 @@ describe('Users Endpoints', () => {
 		});
 	
 		return await request(createServer())
-			.get(`/api/users/${post._id}`)
+			.get(`/api/users/${user._id}`)
 			.expect(200)
 			.then(response => {
-				expect(response.body.email).toBe(post.email);
-				expect(response.body.first_name).toBe(post.first_name);
-				expect(response.body.last_name).toBe(post.last_name)
-				expect(response.body.full_name).toBe(post.full_name)
+				expect(response.body.email).toBe(user.email);
+				expect(response.body.first_name).toBe(user.first_name);
+				expect(response.body.last_name).toBe(user.last_name)
+				expect(response.body.full_name).toBe(user.full_name)
 			});
 	});
 	
