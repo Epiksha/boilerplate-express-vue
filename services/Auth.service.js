@@ -17,6 +17,15 @@ class AuthService {
                 throw new Error('Testing error handling.');
             }
 
+            if (!request.body.password) {
+                responseBody.statusCode = 422;
+                responseBody.errors = {
+                    default: ['Invalid credentials.'],
+                };
+
+                return responseBody;
+            }
+
             const user = await UserModel.findOne({ email: request.body.email });
 
             if (!user) {
@@ -52,7 +61,6 @@ class AuthService {
                 token: user.token
             };
         } catch (error) {
-            console.error(error);
             responseBody.statusCode = 500;
             responseBody.errors = {
                 default: ['There was an issue connecting to the server. Please wait a moment and try again.'],
@@ -83,7 +91,6 @@ class AuthService {
                 token: request.user.token,
             };
         } catch (error) {
-            console.error(error.details);
             responseBody.statusCode = 500;
             responseBody.errors = {
                 default: ['There was an issue connecting to the server. Please wait a moment and try again.'],

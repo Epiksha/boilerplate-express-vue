@@ -8,7 +8,7 @@ class AuthController {
     }
 
     async validate(request, response) {
-        const payload = await AuthService.validate(request, response);
+        const payload = await AuthService.validate(request);
 
         response.status(payload.statusCode).send(payload.data);
     }

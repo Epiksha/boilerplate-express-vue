@@ -1,22 +1,36 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = require('../config');
 const User = require('../models/User.model');
+const { request: requestUtility } = require('../libs/utilities');
+const mongoose = require('mongoose');
 
 class UserService {
     async createUser(request) {
         const responseBody = {};
+
+        if (!request.body) {
+            responseBody.statusCode = 422;
+            responseBody.data = {
+                errors: {  default: ['No data sent with request.'] },
+            };
+
+            return responseBody;
+        }
+
         const full_name = `${request.body.first_name} ${request.body.last_name}`;
         const userData = {...request.body, full_name};
 
         try {
+            if (!mongoose.connection.readyState) {
+                throw new Error();
+            }
+
             const isUserFound = await User.findOne({ 'email': request.body.email });
 
             if (isUserFound) {
                 responseBody.statusCode = 409;
                 responseBody.data = {
-                    errors: { default: 'There was an error creating user. Please try again.' },
+                    errors: { default: ['There was an error creating user. Please try again.'] },
                 };
                 
                 return responseBody;
@@ -26,7 +40,7 @@ class UserService {
             userData.password = encryptedPassword;
 
             const user = await User.create(userData);
-            const token = this.signToken(user._id, request.body.email);
+            const token = requestUtility.signToken(user._id, request.body.email);
             
             user.token = token;
 
@@ -40,27 +54,17 @@ class UserService {
                 token: user.token,
             };
         } catch (error) {
-            console.error(error);
-
             responseBody.statusCode = 500;
             responseBody.data = {
-                errors: { default: 'There was an error creating user. Please try again.' },
+                errors: { default: ['There was an error creating user. Please try again.'] },
             };
+        } finally {
+            return responseBody;
         }
-
-        return responseBody;
     }
 
     async encryptPassword(password) {
         return await bcrypt.hash(password, 10);
-    }
-
-    signToken(id, email) {
-        return jwt.sign(
-            { user_id: id, email: email },
-            JWT_SECRET,
-            { expiresIn: '2 minutes' }
-        );
     }
 
     async deleteUser(id) {
@@ -70,19 +74,25 @@ class UserService {
             const isUserFound = await User.findById(id);
 
             if (!isUserFound) {
-                responseBody.message = 'Could not find user to delete';
                 responseBody.statusCode = 404;
+                responseBody.data = {
+                    errors: { default: ['Could not find user to delete.'] },
+                };
+
                 return responseBody;
             }
 
             await User.deleteOne({ _id: id });
 
-            responseBody.message = 'Successfully deleted user.';
             responseBody.statusCode = 200;
+            responseBody.data = {
+                message: 'Successfully deleted user.',
+            };
         } catch (error) {
-            console.error(error);
-            responseBody.message = 'The server encountered an error.';
             responseBody.statusCode = 500;
+            responseBody.data = {
+                errors: { default: ['The server encountered an error.'] },
+            };
         }
 
         return responseBody;
@@ -97,11 +107,9 @@ class UserService {
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
-            console.error(error);
-
             responseBody.statusCode = 500;
             responseBody.data = {
-                errors: { default: 'There was an error getting users. Please try again.' },
+                errors: { default: ['There was an error getting users. Please try again.'] },
             };
         }
 
@@ -117,7 +125,7 @@ class UserService {
             if (!result) {
                 responseBody.statusCode = 404;
                 responseBody.data = {
-                    errors: { default: 'Could not get user information. Please try again.' },
+                    errors: { default: ['Could not get user information. Please try again.'] },
                 };
 
                 return responseBody;
@@ -126,11 +134,9 @@ class UserService {
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
-            console.error(error);
-
             responseBody.statusCode = 500;
             responseBody.data = {
-                errors: { default: 'Could not get user information. Please try again.' },
+                errors: { default: ['Could not get user information. Please try again.'] },
             };
         }
 
@@ -146,7 +152,7 @@ class UserService {
             if (!isUserFound) {
                 responseBody.statusCode = 404;
                 responseBody.data = {
-                    errors: { default:  'Could not find a user with the provided id.' },
+                    errors: { default: ['Could not find a user with the provided id.'] },
                 };
 
                 return responseBody;
@@ -157,7 +163,7 @@ class UserService {
             if (!result) {
                 responseBody.statusCode = 500;
                 responseBody.data = {
-                    errors: { default: 'Could not update user information. Please try again.' },
+                    errors: { default: ['Could not update user information. Please try again.'] },
                 };
 
                 return responseBody;
@@ -166,11 +172,9 @@ class UserService {
             responseBody.statusCode = 200;
             responseBody.data = result;
         } catch (error) {
-            console.error(error);
-
             responseBody.statusCode = 500;
             responseBody.data = {
-                errors: { default: 'Could not update user information. Please try again.' },
+                errors: { default: ['Could not update user information. Please try again.'] },
             };
         }
 

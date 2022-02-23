@@ -1,3 +1,7 @@
+const jwt = require('jsonwebtoken');
+
+const { JWT_SECRET } = require('../../config');
+
 module.exports = {
     extractToken(request) {
         let foundToken = request?.body?.token || request?.query?.token || request.headers?.["x-access-token"];
@@ -51,5 +55,13 @@ module.exports = {
                 responseErrors.default.push(message);
             }
         });
+    },
+
+    signToken(id, email) {
+        return jwt.sign(
+            { user_id: id, email: email },
+            JWT_SECRET,
+            { expiresIn: '2 minutes' }
+        );
     },
 };

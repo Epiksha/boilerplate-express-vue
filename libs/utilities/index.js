@@ -1,7 +1,7 @@
 const requestUtility = require('./request.utility');
 
 const helpers = {
-    request: {...requestUtility},
+    request: requestUtility,
 };
 
 module.exports = helpers;
