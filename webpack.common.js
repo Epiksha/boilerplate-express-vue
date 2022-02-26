@@ -56,10 +56,11 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(woff|ttf|eot|jpe?g|png|vtt|webp|ttf)$/,
+                test: /\.(woff|ttf|eot|jpe?g|png|vtt|webp|ttf|ico)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
+                        name: '[name].[ext]',
                         outputPath: 'assets/',
                     },
                 },

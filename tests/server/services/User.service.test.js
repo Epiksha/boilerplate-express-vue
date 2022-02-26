@@ -21,14 +21,24 @@ describe('UserService', () => {
         }
     });
 
-    it('encryptPassword', () => {
-        const token = UserService.encryptPassword('helloworld');
-
-        expect(token).toBeTruthy();
-    });
+    describe('encryptPassword', () => {
+        it('works with string passed in', () => {
+            const token = UserService.encryptPassword('helloworld');
+    
+            expect(token).toBeTruthy();
+        });
+        
+        it('fails if string not passed in', () => {
+            try {
+               expect(() => UserService.encryptPassword());
+            } catch (error) {
+                expect (error.message).toBe('No password provided.');
+            }
+        });
+    })
 
     describe('createUser', () => {
-        it('Succeeds if correct data passed in', async () => {
+        test('Succeeds if correct data passed in', async () => {
             const request = {
                 body: {
                     first_name: 'Jonathan',
@@ -48,8 +58,43 @@ describe('UserService', () => {
             expect(response.data.last_name).toBeTruthy();
             expect(response.data.token).toBeTruthy();
         });
+        
+        test('Fails if user already exists', async () => {
+            const data = {
+                first_name: 'Jonathan',
+                last_name: 'Smithson',
+                email: 'test@test.com',
+                password: 'helloworld',
+            };
 
-        it('Reaches catch if server error', async () => {
+            await supertest(createServer())
+                .post('/api/users')
+                .send(data)
+                .expect(201)
+                .then(async (response) => {
+                    expect(response.body.id).toBeTruthy();
+                    
+                    const user = await User.findOne({ _id: response.body.id });
+                    expect(response.body.email).toBe(user.email);
+                    expect(response.body.first_name).toBe(user.first_name);
+                    expect(response.body.last_name).toBe(user.last_name);
+                    expect(response.body.full_name).toBe(`${user.first_name} ${user.last_name}`);
+        
+                    expect(user).toBeTruthy();
+
+                    return response.body;
+                });
+
+            const response = await UserService.createUser({ body: data });
+
+            expect(response.statusCode).toBe(409);
+            expect(response.data).toBeTruthy();
+            expect(response.data.errors).toBeTruthy();
+            expect(response.data.errors.default).toBeTruthy();
+            expect(response.data.errors.default).toStrictEqual(['There was an error creating user. Please try again.']);
+        });
+
+        test('Fails if server error', async () => {
             await new Promise(resolve => {
                 mongoose.connection.db.dropDatabase(() => {
                     mongoose.connection.close(() => resolve());
@@ -74,7 +119,7 @@ describe('UserService', () => {
             });
         });
         
-        it('Fails if user not passed in', async () => {
+        test('Fails if user not passed in', async () => {
             const response = await UserService.createUser({});
 
             expect(response).toBeTruthy();
@@ -87,7 +132,7 @@ describe('UserService', () => {
     });
 
     describe('deleteUser', () => {
-        it('Succeeds if correct data passed in', async () => {
+        test('Succeeds if correct data passed in', async () => {
             const data = {
                 first_name: 'Jonathan',
                 last_name: 'Smithson',
@@ -122,7 +167,7 @@ describe('UserService', () => {
             expect(response.data.message).toBe('Successfully deleted user.');
         });
         
-        it('Returns 500 if user not found', async () => {
+        test('Returns 500 if user not found', async () => {
             const response = await UserService.deleteUser('teststring');
 
             expect(response).toBeTruthy();
@@ -133,7 +178,7 @@ describe('UserService', () => {
             expect(response.data.errors.default).toStrictEqual(['The server encountered an error.']);
         });
         
-        it('Reaches catch block if cannot connect to database.', async () => {
+        test('Reaches catch block if cannot connect to database.', async () => {
             await new Promise(resolve => {
                 mongoose.connection.db.dropDatabase(() => {
                     mongoose.connection.close(() => resolve());
@@ -152,14 +197,14 @@ describe('UserService', () => {
     });
     
     describe('getAllUsers', () => {
-        it('Succeeds if database connected', async () => {
+        test('Succeeds if database connected', async () => {
             const response = await UserService.getAllUsers();
 
             expect(response.statusCode).toBe(200);
             expect(response.data).toBeTruthy();
         });
         
-        it('Reaches catch block if cannot connect to database.', async () => {
+        test('Reaches catch block if cannot connect to database.', async () => {
             await new Promise(resolve => {
                 mongoose.connection.db.dropDatabase(() => {
                     mongoose.connection.close(() => resolve());
@@ -178,7 +223,7 @@ describe('UserService', () => {
     });
 
     describe('getUser', () => {
-        it('Succeeds if correct data passed in', async () => {
+        test('Succeeds if correct data passed in', async () => {
             const data = {
                 first_name: 'Jonathan',
                 last_name: 'Smithson',
@@ -216,7 +261,7 @@ describe('UserService', () => {
             expect(response.data.id).toBeTruthy();
         });
         
-        it('Returns 500 if user not found', async () => {
+        test('Returns 500 if user not found', async () => {
             const response = await UserService.getUser('teststring');
 
             expect(response).toBeTruthy();
@@ -227,7 +272,7 @@ describe('UserService', () => {
             expect(response.data.errors.default).toStrictEqual(['Could not get user information. Please try again.']);
         });
         
-        it('Reaches catch block if cannot connect to database.', async () => {
+        test('Reaches catch block if cannot connect to database.', async () => {
             await new Promise(resolve => {
                 mongoose.connection.db.dropDatabase(() => {
                     mongoose.connection.close(() => resolve());
@@ -246,7 +291,7 @@ describe('UserService', () => {
     });
     
     describe('updateUser', () => {
-        it('Succeeds if correct data passed in', async () => {
+        test('Succeeds if correct data passed in', async () => {
             const data = {
                 first_name: 'Jonathan',
                 last_name: 'Smithson',
@@ -291,7 +336,7 @@ describe('UserService', () => {
             expect(response.data.id).toBeTruthy();
         });
         
-        it('Returns 500 if user not found', async () => {
+        test('Returns 500 if user not found', async () => {
             const response = await UserService.updateUser('teststring');
 
             expect(response).toBeTruthy();
@@ -302,7 +347,7 @@ describe('UserService', () => {
             expect(response.data.errors.default).toStrictEqual(['Could not update user information. Please try again.']);
         });
         
-        it('Reaches catch block if cannot connect to database.', async () => {
+        test('Reaches catch block if cannot connect to database.', async () => {
             await new Promise(resolve => {
                 mongoose.connection.db.dropDatabase(() => {
                     mongoose.connection.close(() => resolve());

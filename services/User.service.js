@@ -7,23 +7,23 @@ const mongoose = require('mongoose');
 class UserService {
     async createUser(request) {
         const responseBody = {};
-
-        if (!request.body) {
-            responseBody.statusCode = 422;
-            responseBody.data = {
-                errors: {  default: ['No data sent with request.'] },
-            };
-
-            return responseBody;
-        }
-
-        const full_name = `${request.body.first_name} ${request.body.last_name}`;
-        const userData = {...request.body, full_name};
-
+        
         try {
             if (!mongoose.connection.readyState) {
                 throw new Error();
             }
+            
+            if (!request.body) {
+                responseBody.statusCode = 422;
+                responseBody.data = {
+                    errors: {  default: ['No data sent with request.'] },
+                };
+    
+                return responseBody;
+            }
+    
+            const full_name = `${request.body.first_name} ${request.body.last_name}`;
+            const userData = {...request.body, full_name};
 
             const isUserFound = await User.findOne({ 'email': request.body.email });
 
@@ -64,6 +64,10 @@ class UserService {
     }
 
     async encryptPassword(password) {
+        if (!password) {
+            throw new Error('No password provided.');
+        }
+
         return await bcrypt.hash(password, 10);
     }
 

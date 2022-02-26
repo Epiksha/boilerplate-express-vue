@@ -4,7 +4,6 @@ const cors = require('cors');
 
 const { PORT, CORS_HEADERS } = require('./config');
 const routes = require('./routes');
-const { extractToken } = require('./libs/utilities/request.utility');
 
 require('./services/Database.service');
 
