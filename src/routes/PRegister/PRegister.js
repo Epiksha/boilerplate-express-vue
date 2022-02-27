@@ -33,7 +33,7 @@ export default {
     methods: {
         async submit() {
             try {
-                const { data } = await axios.post(`${process.env.API_URL}/auth/token`, this.form);
+                const { data } = await axios.post(`${process.env.API_URL}/users`, this.form);
 
                 await this.$store.dispatch('user/set', data);
                 

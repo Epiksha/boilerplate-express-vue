@@ -75,7 +75,7 @@
                         type="submit"
                         @click.prevent="submit"
                     >
-                        register
+                        Register
                     </button>
                 </form>
             </div>

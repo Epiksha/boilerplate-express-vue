@@ -35,7 +35,7 @@ export default {
                 
                 this.$router.push('/members');
             } catch (error) {
-                this.errors = error.response.data.errors;
+                this.errors = error.response.data;
             }
         },
     },
